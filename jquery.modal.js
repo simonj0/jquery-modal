@@ -55,7 +55,7 @@
         remove = function(event, modal) { modal.elm.remove(); };
         this.showSpinner();
         el.trigger($.modal.AJAX_SEND);
-        $.get(target).done(function(html) {
+        $.get(target, this.options.ajaxParams).done(function(html) {
           if (!$.modal.isActive()) return;
           el.trigger($.modal.AJAX_SUCCESS);
           var current = getCurrent();
@@ -212,7 +212,8 @@
     showSpinner: true,
     showClose: true,
     fadeDuration: null,   // Number of milliseconds the fade animation takes.
-    fadeDelay: 1.0        // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
+    fadeDelay: 1.0,       // Point during the overlay's fade-in that the modal begins to fade in (.5 = 50%, 1.5 = 150%, etc.)
+    ajaxParams: null
   };
 
   // Event constants

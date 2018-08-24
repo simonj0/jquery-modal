@@ -114,7 +114,9 @@
 
     block: function() {
       this.$elm.trigger($.modal.BEFORE_BLOCK, [this._ctx()]);
-      this.$body.css('overflow','hidden');
+      var currentMarginRight = parseInt(this.$body.css('margin-right')),
+        scrollBarWidth = window.innerWidth-$(window).width();
+      this.$body.css({ overflow:'hidden', marginRight:currentMarginRight+scrollBarWidth+'px' });
       this.$blocker = $('<div class="' + this.options.blockerClass + ' blocker current"></div>').appendTo(this.$body);
       selectCurrent();
       if(this.options.doFade) {
@@ -132,7 +134,7 @@
         this.$blocker = null;
         selectCurrent();
         if (!$.modal.isActive())
-          this.$body.css('overflow','');
+          this.$body.css({ overflow:'', marginRight:'' });
       }
     },
 
